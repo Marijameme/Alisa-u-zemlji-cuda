@@ -309,8 +309,8 @@ int main() {
         glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
         //draw plato
         glBindVertexArray(VAO);
-        for(int i = 0; i < 100; i++) {
-            for (int j = 0; j < 100; j++) {
+        for(int i = 0; i < 50; i++) {
+            for (int j = 0; j < 50; j++) {
                 glm::mat4 model = glm::mat4(1.0f);
                 model = glm::translate(model, glm::vec3(i, 1.0, -j));
 //                model = glm::rotate(model, glm::radians(90.0f), glm::vec3(1.0f, 0.0f, 0.0f));

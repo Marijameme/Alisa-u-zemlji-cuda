@@ -28,6 +28,8 @@ void processInput(GLFWwindow *window);
 
 void key_callback(GLFWwindow *window, int key, int scancode, int action, int mods);
 
+unsigned int loadCubemap(std::vector<std::string> faces);
+
 // settings
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
@@ -164,11 +166,10 @@ int main() {
     // build and compile shaders
     // -------------------------
     Shader platoShader("resources/shaders/plato.vs", "resources/shaders/plato.fs");
-
+    Shader skyBoxShader("resources/shaders/sky_box.vs", "resources/shaders/sky_box.fs");
     // load models
     // -----------
-    Model ourModel("resources/objects/backpack/backpack.obj");
-    ourModel.SetShaderTextureNamePrefix("material.");
+
 
     /*****/
     //vertexes
@@ -234,9 +235,78 @@ int main() {
     glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
     glEnableVertexAttribArray(1);
 
+    float skyBoxVertices[] = {
+            // positions
+            -1.0f,  1.0f, -1.0f,
+            -1.0f, -1.0f, -1.0f,
+            1.0f, -1.0f, -1.0f,
+            1.0f, -1.0f, -1.0f,
+            1.0f,  1.0f, -1.0f,
+            -1.0f,  1.0f, -1.0f,
+
+            -1.0f, -1.0f,  1.0f,
+            -1.0f, -1.0f, -1.0f,
+            -1.0f,  1.0f, -1.0f,
+            -1.0f,  1.0f, -1.0f,
+            -1.0f,  1.0f,  1.0f,
+            -1.0f, -1.0f,  1.0f,
+
+            1.0f, -1.0f, -1.0f,
+            1.0f, -1.0f,  1.0f,
+            1.0f,  1.0f,  1.0f,
+            1.0f,  1.0f,  1.0f,
+            1.0f,  1.0f, -1.0f,
+            1.0f, -1.0f, -1.0f,
+
+            -1.0f, -1.0f,  1.0f,
+            -1.0f,  1.0f,  1.0f,
+            1.0f,  1.0f,  1.0f,
+            1.0f,  1.0f,  1.0f,
+            1.0f, -1.0f,  1.0f,
+            -1.0f, -1.0f,  1.0f,
+
+            -1.0f,  1.0f, -1.0f,
+            1.0f,  1.0f, -1.0f,
+            1.0f,  1.0f,  1.0f,
+            1.0f,  1.0f,  1.0f,
+            -1.0f,  1.0f,  1.0f,
+            -1.0f,  1.0f, -1.0f,
+
+            -1.0f, -1.0f, -1.0f,
+            -1.0f, -1.0f,  1.0f,
+            1.0f, -1.0f, -1.0f,
+            1.0f, -1.0f, -1.0f,
+            -1.0f, -1.0f,  1.0f,
+            1.0f, -1.0f,  1.0f
+    };
+
+    unsigned skyBoxVBO, skyBoxVAO;
+    glGenVertexArrays(1, &skyBoxVAO);
+    glGenBuffers(1, &skyBoxVBO);
+
+    glBindVertexArray(skyBoxVAO);
+
+    glBindBuffer(GL_ARRAY_BUFFER, skyBoxVBO);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(skyBoxVertices), skyBoxVertices, GL_STATIC_DRAW);
+
+    //position attribute
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3*sizeof(float ), (void*)0);
+    glEnableVertexAttribArray(0);
+
     //load and create textures
     Texture2D grassDiffuse("resources/textures/grass_texture.jpg", GL_REPEAT, GL_LINEAR);
     Texture2D grassSpecular("resources/textures/grass_specular.jpg", GL_REPEAT, GL_LINEAR);
+    vector<std::string> faces
+            {
+                    "resources/textures/Apocalypse/vz_apocalypse_right.png",
+                    "resources/textures/Apocalypse/vz_apocalypse_left.png",
+                    "resources/textures/Apocalypse/vz_apocalypse_up.png",
+                    "resources/textures/Apocalypse/vz_apocalypse_down.png",
+                    "resources/textures/Apocalypse/vz_apocalypse_front.png",
+                    "resources/textures/Apocalypse/vz_apocalypse_back.png"
+            };
+    unsigned int cubemapTexture = loadCubemap(faces);
+
     /*****/
 
 
@@ -313,17 +383,27 @@ int main() {
             for (int j = 0; j < 50; j++) {
                 glm::mat4 model = glm::mat4(1.0f);
                 model = glm::translate(model, glm::vec3(i, 1.0, -j));
-//                model = glm::rotate(model, glm::radians(90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
-//        model = glm::scale(model, glm::vec3(500, 500, 0));
                 platoShader.setMat4("model", model);
                 glDrawArrays(GL_TRIANGLES, 0, 36);
             }
         }
 
+        //draw sky box
+        glDepthFunc(GL_LEQUAL);
+        skyBoxShader.use();
+        skyBoxShader.setInt("skybox", 0);
+        view = glm::mat4(glm::mat3(view)); //removing the translation part
+        skyBoxShader.setMat4("view", view);
+        skyBoxShader.setMat4("projection", projection);
+
+        glBindVertexArray(skyBoxVAO);
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_CUBE_MAP, cubemapTexture);
+        glDrawArrays(GL_TRIANGLES, 0, 36);
+        glBindVertexArray(0);
+        glDepthFunc(GL_LESS);
         if (programState->ImGuiEnabled)
             DrawImGui(programState);
-
-
 
         // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
         // -------------------------------------------------------------------------------
@@ -436,5 +516,33 @@ void key_callback(GLFWwindow *window, int key, int scancode, int action, int mod
             glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
         }
     }
+}
+
+unsigned int loadCubemap(std::vector<std::string> faces){
+    unsigned int t_id;
+    glGenTextures(1, &t_id);
+    glBindTexture(GL_TEXTURE_CUBE_MAP, t_id);
+
+    //load images
+    int width, height, nChannels;
+    for(unsigned int i = 0; i < faces.size(); i++){
+        unsigned char *data = stbi_load(FileSystem::getPath(faces[i]).c_str(),
+                                        &width, &height, &nChannels, 0);
+        if(data){
+            std::cout << "Tekstura za sky box je ucitana\n";
+            glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0 , GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+        }else{
+            ASSERT(false, "Tekstura za sky box nije mogla da se ucita");
+        }
+        stbi_image_free(data);
+
+        glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+        glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+        glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+
+        glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    }
+    return t_id;
 }
 

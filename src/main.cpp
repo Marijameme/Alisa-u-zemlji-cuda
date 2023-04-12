@@ -141,7 +141,7 @@ int main() {
     }
 
     // tell stb_image.h to flip loaded texture's on the y-axis (before loading model).
-    stbi_set_flip_vertically_on_load(true);
+//    stbi_set_flip_vertically_on_load(true);
 
     programState = new ProgramState;
     programState->LoadFromFile("resources/program_state.txt");
@@ -280,7 +280,7 @@ int main() {
             1.0f, -1.0f,  1.0f
     };
 
-    unsigned skyBoxVBO, skyBoxVAO;
+    unsigned int skyBoxVBO, skyBoxVAO;
     glGenVertexArrays(1, &skyBoxVAO);
     glGenBuffers(1, &skyBoxVBO);
 
@@ -289,9 +289,8 @@ int main() {
     glBindBuffer(GL_ARRAY_BUFFER, skyBoxVBO);
     glBufferData(GL_ARRAY_BUFFER, sizeof(skyBoxVertices), skyBoxVertices, GL_STATIC_DRAW);
 
-    //position attribute
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3*sizeof(float ), (void*)0);
     glEnableVertexAttribArray(0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3*sizeof(float ), (void*)0);
 
     //load and create textures
     Texture2D grassDiffuse("resources/textures/grass_texture.jpg", GL_REPEAT, GL_LINEAR);
@@ -327,6 +326,8 @@ int main() {
 
     // render loop
     // -----------
+    skyBoxShader.use();
+    skyBoxShader.setInt("skybox", 0);
     while (!glfwWindowShouldClose(window)) {
         // per-frame time logic
         // --------------------
@@ -391,7 +392,6 @@ int main() {
         //draw sky box
         glDepthFunc(GL_LEQUAL);
         skyBoxShader.use();
-        skyBoxShader.setInt("skybox", 0);
         view = glm::mat4(glm::mat3(view)); //removing the translation part
         skyBoxShader.setMat4("view", view);
         skyBoxShader.setMat4("projection", projection);
@@ -402,6 +402,7 @@ int main() {
         glDrawArrays(GL_TRIANGLES, 0, 36);
         glBindVertexArray(0);
         glDepthFunc(GL_LESS);
+
         if (programState->ImGuiEnabled)
             DrawImGui(programState);
 
@@ -418,6 +419,11 @@ int main() {
     ImGui::DestroyContext();
     // glfw: terminate, clearing all previously allocated GLFW resources.
     // ------------------------------------------------------------------
+    glDeleteVertexArrays(1, &VAO);
+    glDeleteVertexArrays(1, &skyBoxVAO);
+    glDeleteBuffers(1, &VBO);
+    glDeleteBuffers(1, &skyBoxVAO);
+
     glfwTerminate();
     return 0;
 }
@@ -518,7 +524,7 @@ void key_callback(GLFWwindow *window, int key, int scancode, int action, int mod
     }
 }
 
-unsigned int loadCubemap(std::vector<std::string> faces){
+unsigned int loadCubemap(vector<std::string> faces){
     unsigned int t_id;
     glGenTextures(1, &t_id);
     glBindTexture(GL_TEXTURE_CUBE_MAP, t_id);

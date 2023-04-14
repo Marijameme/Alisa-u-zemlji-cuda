@@ -1,0 +1,640 @@
+# Blender 3.4.1 MTL File: 'None'
+# www.blender.org
+
+newmtl Bark_Red-spruce.001
+Ns 18.000004
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Kd  Bark_Picea_rubens_Diffuse.png
+map_Bump -bm 0.500000  Bark_Picea_rubens_Normal.png
+
+newmtl Bark_Red-spruce.002
+Ns 18.000004
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Kd  Bark_Picea_rubens_Diffuse.png
+map_Bump -bm 0.500000  Bark_Picea_rubens_Normal.png
+
+newmtl Bark_Red-spruce.003
+Ns 18.000004
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Kd  Bark_Picea_rubens_Diffuse.png
+map_Bump -bm 0.500000  Bark_Picea_rubens_Normal.png
+
+newmtl Bark_Red-spruce.004
+Ns 18.000004
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Kd  Bark_Picea_rubens_Diffuse.png
+map_Bump -bm 0.500000  Bark_Picea_rubens_Normal.png
+
+newmtl Bark_Red-spruce.005
+Ns 18.000004
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Kd  Bark_Picea_rubens_Diffuse.png
+map_Bump -bm 0.500000  Bark_Picea_rubens_Normal.png
+
+newmtl Bark_Red-spruce.006
+Ns 18.000004
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Kd  Bark_Picea_rubens_Diffuse.png
+map_Bump -bm 0.500000  Bark_Picea_rubens_Normal.png
+
+newmtl Bark_Red-spruce.007
+Ns 18.000004
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Kd  Bark_Picea_rubens_Diffuse.png
+map_Bump -bm 0.500000  Bark_Picea_rubens_Normal.png
+
+newmtl Bark_Red-spruce.008
+Ns 18.000004
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Kd  Bark_Picea_rubens_Diffuse.png
+map_Bump -bm 0.500000  Bark_Picea_rubens_Normal.png
+
+newmtl Bark_Red-spruce.009
+Ns 18.000004
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Kd  Bark_Picea_rubens_Diffuse.png
+map_Bump -bm 0.500000  Bark_Picea_rubens_Normal.png
+
+newmtl Bark_Red-spruce.010
+Ns 18.000004
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Kd  Bark_Picea_rubens_Diffuse.png
+map_Bump -bm 0.500000  Bark_Picea_rubens_Normal.png
+
+newmtl Bark_Red-spruce.011
+Ns 18.000004
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Kd  Bark_Picea_rubens_Diffuse.png
+map_Bump -bm 0.500000  Bark_Picea_rubens_Normal.png
+
+newmtl Bark_Red-spruce.012
+Ns 18.000004
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Kd  Bark_Picea_rubens_Diffuse.png
+map_Bump -bm 0.500000  Bark_Picea_rubens_Normal.png
+
+newmtl Bark_Red-spruce.013
+Ns 18.000004
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Kd  Bark_Picea_rubens_Diffuse.png
+map_Bump -bm 0.500000  Bark_Picea_rubens_Normal.png
+
+newmtl Bark_Red-spruce.014
+Ns 18.000004
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Kd  Bark_Picea_rubens_Diffuse.png
+map_Bump -bm 0.500000  Bark_Picea_rubens_Normal.png
+
+newmtl Leaf_Red-spruce.001
+Ns 18.000004
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 1
+map_Kd  Leaf_Picea_rubens_Diffuse.png
+map_Bump -bm 0.500000  Leaf_Picea-rubens_Normal.png
+
+newmtl Leaf_Red-spruce.002
+Ns 18.000004
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 1
+map_Kd  Leaf_Picea_rubens_Diffuse.png
+map_Bump -bm 0.500000  Leaf_Picea-rubens_Normal.png
+
+newmtl Leaf_Red-spruce.003
+Ns 18.000004
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 1
+map_Kd  Leaf_Picea_rubens_Diffuse.png
+map_Bump -bm 0.500000  Leaf_Picea-rubens_Normal.png
+
+newmtl Leaf_Red-spruce.004
+Ns 18.000004
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 1
+map_Kd  Leaf_Picea_rubens_Diffuse.png
+map_Bump -bm 0.500000  Leaf_Picea-rubens_Normal.png
+
+newmtl Leaf_Red-spruce.005
+Ns 18.000004
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 1
+map_Kd  Leaf_Picea_rubens_Diffuse.png
+map_Bump -bm 0.500000  Leaf_Picea-rubens_Normal.png
+
+newmtl Leaf_Red-spruce.006
+Ns 18.000004
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 1
+map_Kd  Leaf_Picea_rubens_Diffuse.png
+map_Bump -bm 0.500000  Leaf_Picea-rubens_Normal.png
+
+newmtl Leaf_Red-spruce.007
+Ns 18.000004
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 1
+map_Kd  Leaf_Picea_rubens_Diffuse.png
+map_Bump -bm 0.500000  Leaf_Picea-rubens_Normal.png
+
+newmtl Leaf_Red-spruce.008
+Ns 18.000004
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 1
+map_Kd  Leaf_Picea_rubens_Diffuse.png
+map_Bump -bm 0.500000  Leaf_Picea-rubens_Normal.png
+
+newmtl Leaf_Red-spruce.009
+Ns 18.000004
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 1
+map_Kd  Leaf_Picea_rubens_Diffuse.png
+map_Bump -bm 0.500000  Leaf_Picea-rubens_Normal.png
+
+newmtl Leaf_Red-spruce.010
+Ns 18.000004
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 1
+map_Kd  Leaf_Picea_rubens_Diffuse.png
+map_Bump -bm 0.500000  Leaf_Picea-rubens_Normal.png
+
+newmtl Leaf_Red-spruce.011
+Ns 18.000004
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 1
+map_Kd  Leaf_Picea_rubens_Diffuse.png
+map_Bump -bm 0.500000  Leaf_Picea-rubens_Normal.png
+
+newmtl Leaf_Red-spruce.012
+Ns 18.000004
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 1
+map_Kd  Leaf_Picea_rubens_Diffuse.png
+map_Bump -bm 0.500000  Leaf_Picea-rubens_Normal.png
+
+newmtl Leaf_Red-spruce.013
+Ns 18.000004
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 1
+map_Kd  Leaf_Picea_rubens_Diffuse.png
+map_Bump -bm 0.500000  Leaf_Picea-rubens_Normal.png
+
+newmtl Leaf_Red-spruce.014
+Ns 18.000004
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 1
+map_Kd  Leaf_Picea_rubens_Diffuse.png
+map_Bump -bm 0.500000  Leaf_Picea-rubens_Normal.png
+
+newmtl amanita.016
+Ns 34.000004
+Ka 1.000000 1.000000 1.000000
+Ks 0.225000 0.225000 0.225000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd   amanita_color.jpg
+map_Bump   amanita_bump.jpg
+
+newmtl amanita.017
+Ns 34.000004
+Ka 1.000000 1.000000 1.000000
+Ks 0.225000 0.225000 0.225000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd   amanita_color.jpg
+map_Bump   amanita_bump.jpg
+
+newmtl amanita.018
+Ns 34.000004
+Ka 1.000000 1.000000 1.000000
+Ks 0.225000 0.225000 0.225000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd   amanita_color.jpg
+map_Bump   amanita_bump.jpg
+
+newmtl amanita.019
+Ns 34.000004
+Ka 1.000000 1.000000 1.000000
+Ks 0.225000 0.225000 0.225000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd   amanita_color.jpg
+map_Bump   amanita_bump.jpg
+
+newmtl amanita.020
+Ns 34.000004
+Ka 1.000000 1.000000 1.000000
+Ks 0.225000 0.225000 0.225000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd   amanita_color.jpg
+map_Bump   amanita_bump.jpg
+
+newmtl amanita.021
+Ns 34.000004
+Ka 1.000000 1.000000 1.000000
+Ks 0.225000 0.225000 0.225000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd   amanita_color.jpg
+map_Bump   amanita_bump.jpg
+
+newmtl amanita.022
+Ns 34.000004
+Ka 1.000000 1.000000 1.000000
+Ks 0.225000 0.225000 0.225000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd   amanita_color.jpg
+map_Bump   amanita_bump.jpg
+
+newmtl amanita.023
+Ns 34.000004
+Ka 1.000000 1.000000 1.000000
+Ks 0.225000 0.225000 0.225000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd   amanita_color.jpg
+map_Bump   amanita_bump.jpg
+
+newmtl ambrela.008
+Ns 10.000005
+Ka 1.000000 1.000000 1.000000
+Ks 0.135000 0.135000 0.135000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd    ambrela_color.jpg
+map_Bump    ambrela_bump.jpg
+
+newmtl ambrela.009
+Ns 10.000005
+Ka 1.000000 1.000000 1.000000
+Ks 0.135000 0.135000 0.135000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd    ambrela_color.jpg
+map_Bump    ambrela_bump.jpg
+
+newmtl ambrela.010
+Ns 10.000005
+Ka 1.000000 1.000000 1.000000
+Ks 0.135000 0.135000 0.135000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd    ambrela_color.jpg
+map_Bump    ambrela_bump.jpg
+
+newmtl ambrela.011
+Ns 10.000005
+Ka 1.000000 1.000000 1.000000
+Ks 0.135000 0.135000 0.135000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd    ambrela_color.jpg
+map_Bump    ambrela_bump.jpg
+
+newmtl boletus.004
+Ns 10.000005
+Ka 1.000000 1.000000 1.000000
+Ks 0.180000 0.180000 0.180000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd  boletus_color.jpg
+map_Bump  boletus_bump.jpg
+
+newmtl boletus.005
+Ns 10.000005
+Ka 1.000000 1.000000 1.000000
+Ks 0.180000 0.180000 0.180000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd  boletus_color.jpg
+map_Bump  boletus_bump.jpg
+
+newmtl boletus.006
+Ns 10.000005
+Ka 1.000000 1.000000 1.000000
+Ks 0.180000 0.180000 0.180000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd  boletus_color.jpg
+map_Bump  boletus_bump.jpg
+
+newmtl boletus.007
+Ns 10.000005
+Ka 1.000000 1.000000 1.000000
+Ks 0.180000 0.180000 0.180000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd  boletus_color.jpg
+map_Bump  boletus_bump.jpg
+
+newmtl chanterelles.005
+Ns 6.000004
+Ka 1.000000 1.000000 1.000000
+Ks 0.090000 0.090000 0.090000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd  chanterelles_color.jpg
+map_Bump  chanterelles_bump.jpg
+
+newmtl chanterelles.006
+Ns 6.000004
+Ka 1.000000 1.000000 1.000000
+Ks 0.090000 0.090000 0.090000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd  chanterelles_color.jpg
+map_Bump  chanterelles_bump.jpg
+
+newmtl chanterelles.007
+Ns 6.000004
+Ka 1.000000 1.000000 1.000000
+Ks 0.090000 0.090000 0.090000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd  chanterelles_color.jpg
+map_Bump  chanterelles_bump.jpg
+
+newmtl chanterelles.008
+Ns 6.000004
+Ka 1.000000 1.000000 1.000000
+Ks 0.090000 0.090000 0.090000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd  chanterelles_color.jpg
+map_Bump  chanterelles_bump.jpg
+
+newmtl chanterelles.009
+Ns 6.000004
+Ka 1.000000 1.000000 1.000000
+Ks 0.090000 0.090000 0.090000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd  chanterelles_color.jpg
+map_Bump  chanterelles_bump.jpg
+
+newmtl morel.005
+Ns 16.000006
+Ka 1.000000 1.000000 1.000000
+Ks 0.090000 0.090000 0.090000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd  morel_color.jpg
+map_Bump  morel_bump.jpg
+
+newmtl morel.006
+Ns 16.000006
+Ka 1.000000 1.000000 1.000000
+Ks 0.090000 0.090000 0.090000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd  morel_color.jpg
+map_Bump  morel_bump.jpg
+
+newmtl morel.007
+Ns 16.000006
+Ka 1.000000 1.000000 1.000000
+Ks 0.090000 0.090000 0.090000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd  morel_color.jpg
+map_Bump  morel_bump.jpg
+
+newmtl morel.008
+Ns 16.000006
+Ka 1.000000 1.000000 1.000000
+Ks 0.090000 0.090000 0.090000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd  morel_color.jpg
+map_Bump  morel_bump.jpg
+
+newmtl morel.009
+Ns 16.000006
+Ka 1.000000 1.000000 1.000000
+Ks 0.090000 0.090000 0.090000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd  morel_color.jpg
+map_Bump  morel_bump.jpg
+
+newmtl russula_pink.004
+Ns 38.000011
+Ka 1.000000 1.000000 1.000000
+Ks 0.396000 0.396000 0.396000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd russula_color_pink.jpg
+map_Bump russula_bump.jpg
+
+newmtl russula_pink.005
+Ns 38.000011
+Ka 1.000000 1.000000 1.000000
+Ks 0.396000 0.396000 0.396000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd russula_color_pink.jpg
+map_Bump russula_bump.jpg
+
+newmtl russula_pink.006
+Ns 38.000011
+Ka 1.000000 1.000000 1.000000
+Ks 0.396000 0.396000 0.396000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd russula_color_pink.jpg
+map_Bump russula_bump.jpg
+
+newmtl russula_pink.007
+Ns 38.000011
+Ka 1.000000 1.000000 1.000000
+Ks 0.396000 0.396000 0.396000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd russula_color_pink.jpg
+map_Bump russula_bump.jpg

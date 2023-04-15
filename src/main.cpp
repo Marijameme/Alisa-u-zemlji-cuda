@@ -30,6 +30,8 @@ void key_callback(GLFWwindow *window, int key, int scancode, int action, int mod
 
 unsigned int loadCubemap(std::vector<std::string> faces);
 
+void configurate_instance_buffer(unsigned int num, Model model, glm::mat4 *modelMatrices);
+
 // settings
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
@@ -169,14 +171,172 @@ int main() {
     // -------------------------
     Shader platoShader("resources/shaders/plato.vs", "resources/shaders/plato.fs");
     Shader skyBoxShader("resources/shaders/sky_box.vs", "resources/shaders/sky_box.fs");
-    Shader modelShader("resources/shaders/forest.vs", "resources/shaders/forest.fs");
-
+    Shader instanceShader("resources/shaders/instance.vs", "resources/shaders/instance.fs");
     // load models
     // -----------
-//    Model ourModel("resources/objects/backpack/backpack.obj");
-//    ourModel.SetShaderTextureNamePrefix("material.");
-    Model ourModel("resources/objects/forest/forest.obj");
-    ourModel.SetShaderTextureNamePrefix("material.");
+    Model amanitaModel("resources/objects/amanita/amanita_a_low.obj");
+    amanitaModel.SetShaderTextureNamePrefix("material.");
+    Model ambrelaModel("resources/objects/ambrela/Big_ambrella_low.obj");
+    ambrelaModel.SetShaderTextureNamePrefix("material.");
+    Model boletusModel("resources/objects/boletus/boletus_low.obj");
+    boletusModel.SetShaderTextureNamePrefix("material.");
+    Model chantarellModel("resources/objects/chantarelle/chanterelles_low.obj");
+    chantarellModel.SetShaderTextureNamePrefix("material.");
+    Model morelModel("resources/objects/morel/morel_low.obj");
+    morelModel.SetShaderTextureNamePrefix("materal.");
+    Model russulaModel("resources/objects/russula/russula_low.obj");
+    russulaModel.SetShaderTextureNamePrefix("material.");
+    Model treeBModel("resources/objects/trees/picea_rubens.obj");
+    treeBModel.SetShaderTextureNamePrefix("material.");
+    Model treeAModel("resources/objects/trees/red_spruce_a.obj");
+    treeAModel.SetShaderTextureNamePrefix("matrial.");
+    Model treeCModel("resources/objects/trees/red_spruce_b.obj");
+    treeCModel.SetShaderTextureNamePrefix("material.");
+
+    //create model matrices for amanita
+    unsigned int amanitaNum = 8;
+    glm::mat4* amanitaModelMatrises;
+    amanitaModelMatrises = new glm::mat4[amanitaNum];
+    glm::vec3 amanitaTranslations[] = {
+            glm::vec3(23.5f, 1.5f, -4.0f),
+            glm::vec3(36.5f, 1.5f, -7.5f),
+            glm::vec3(30.0f, 1.5f, -15.0f),
+            glm::vec3(33.3f, 1.5f, -19.0f),
+            glm::vec3(37.5f, 1.5f, -21.5f),
+            glm::vec3(19.5f, 1.5f, -7.6f),
+            glm::vec3(30.0f, 1.5f, -30.0f),
+            glm::vec3(19.5f, 1.5f, -32.5f),
+
+    };
+
+    for(unsigned int i = 0; i < amanitaNum; i++){
+        glm::mat4 model = glm::mat4 (1.0f);
+        model = glm::translate(model, amanitaTranslations[i]);
+        model = glm::scale(model, glm::vec3(3.2f));
+        amanitaModelMatrises[i] = model;
+    }
+    configurate_instance_buffer(amanitaNum, amanitaModel, amanitaModelMatrises);
+
+    //create model matrices for amabrela
+    unsigned int ambrelaNum = 4;
+    glm::mat4* ambrelaModelMatrises;
+    ambrelaModelMatrises = new glm::mat4[ambrelaNum];
+    glm::vec3 ambrelaTranslations[] = {
+            glm::vec3(20.f, 1.5f, -10.0f),
+            glm::vec3(37.5f, 1.5f, -15.5f),
+            glm::vec3(30.0f, 1.5f, -35.0f),
+            glm::vec3(40.3f, 1.5f, -35.0f)
+    };
+
+    for(unsigned int i = 0; i < ambrelaNum; i++){
+        glm::mat4 model = glm::mat4 (1.0f);
+        model = glm::translate(model, ambrelaTranslations[i]);
+        model = glm::scale(model, glm::vec3(3.2f));
+        ambrelaModelMatrises[i] = model;
+    }
+    configurate_instance_buffer(ambrelaNum, ambrelaModel, ambrelaModelMatrises);
+
+    //create model matrices for boletus
+    unsigned int boletusNum = 4;
+    glm::mat4* boletusModelMatrises;
+    boletusModelMatrises = new glm::mat4[boletusNum];
+    glm::vec3 boletusTranslations[] = {
+            glm::vec3(31.5f, 1.5f, -10.0f),
+            glm::vec3(35.5f, 1.5f, -30.0f),
+            glm::vec3(23.5f, 1.5f, -28.5f),
+            glm::vec3(25.3f, 1.5f, -35.0f)
+    };
+
+    for(unsigned int i = 0; i < boletusNum; i++){
+        glm::mat4 model = glm::mat4 (1.0f);
+        model = glm::translate(model, boletusTranslations[i]);
+        model = glm::scale(model, glm::vec3(3.2f));
+        boletusModelMatrises[i] = model;
+    }
+    configurate_instance_buffer(boletusNum, boletusModel, boletusModelMatrises);
+
+    //create model matrices for chantarell
+    unsigned int chantarellNum = 5;
+    glm::mat4* chantarellModelMatrises;
+    chantarellModelMatrises = new glm::mat4[chantarellNum];
+    glm::vec3 chantarellTranslations[] = {
+            glm::vec3(42.5f, 1.5f, -20.0f),
+            glm::vec3(17.5f, 1.5f, -35.0f),
+            glm::vec3(32.5f, 1.5f, -26.5f),
+            glm::vec3(25.0f, 1.5f, -5.0f),
+            glm::vec3(27.5f, 1.5f, -40.5)
+    };
+
+    for(unsigned int i = 0; i < chantarellNum; i++){
+        glm::mat4 model = glm::mat4 (1.0f);
+        model = glm::translate(model, chantarellTranslations[i]);
+        model = glm::scale(model, glm::vec3(3.2f));
+        chantarellModelMatrises[i] = model;
+    }
+    configurate_instance_buffer(chantarellNum, chantarellModel, chantarellModelMatrises);
+
+
+    //create model matrices for morel
+    unsigned int morelNum = 5;
+    glm::mat4* morelModelMatrises;
+    morelModelMatrises = new glm::mat4[morelNum];
+    glm::vec3 morelTranslations[] = {
+            glm::vec3(20.0f, 1.5f, -5.0f),
+            glm::vec3(42.5f, 1.5f, -17.5f),
+            glm::vec3(30.0f, 1.5f, -21.0f),
+            glm::vec3(40.0f, 1.5f, -30.0f),
+            glm::vec3(23.5f, 1.5f, -37.5)
+    };
+
+    for(unsigned int i = 0; i < morelNum; i++){
+        glm::mat4 model = glm::mat4 (1.0f);
+        model = glm::translate(model, morelTranslations[i]);
+        model = glm::scale(model, glm::vec3(3.2f));
+        morelModelMatrises[i] = model;
+    }
+    configurate_instance_buffer(morelNum, morelModel, morelModelMatrises);
+
+    //create model matrices for russula
+    unsigned int russulaNum = 7;
+    glm::mat4* russulaModelMatrises;
+    russulaModelMatrises = new glm::mat4[russulaNum];
+    glm::vec3 russulaTranslations[] = {
+            glm::vec3(30.0f, 1.5f, -12.0f),
+            glm::vec3(19.5f, 1.5f, -20.5f),
+            glm::vec3(15.0f, 1.5f, -28.0f),
+            glm::vec3(17.0f, 1.5f, -30.0f),
+            glm::vec3(30.5f, 1.5f, -36.5),
+            glm::vec3(10.0f, 1.5f, -36.0f),
+            glm::vec3(13.5f, 1.5f, -37.5)
+    };
+
+    for(unsigned int i = 0; i < russulaNum; i++){
+        glm::mat4 model = glm::mat4 (1.0f);
+        model = glm::translate(model, russulaTranslations[i]);
+        model = glm::scale(model, glm::vec3(3.2f));
+        russulaModelMatrises[i] = model;
+    }
+    configurate_instance_buffer(russulaNum, russulaModel, russulaModelMatrises);
+
+    //create model matrices for treeA
+    unsigned int treeANum = 5;
+    glm::mat4* treeAModelMatrises;
+    treeAModelMatrises = new glm::mat4[treeANum];
+    glm::vec3 treeATranslations[] = {
+            glm::vec3(40.0f, 1.0f, -10.0f),
+            glm::vec3(35.5f, 1.0f, -6.0f),
+            glm::vec3(20.0f, 1.0f, -8.0f),
+            glm::vec3(15.0f, 1.0f, -7.0f),
+            glm::vec3(15.5f, 1.0f, -30.5)
+    };
+
+    for(unsigned int i = 0; i < treeANum; i++){
+        glm::mat4 model = glm::mat4 (1.0f);
+        model = glm::translate(model, treeATranslations[i]);
+        model = glm::scale(model, glm::vec3(1.2f));
+        treeAModelMatrises[i] = model;
+    }
+    configurate_instance_buffer(treeANum, treeAModel, treeAModelMatrises);
 
     /*****/
     //vertexes
@@ -293,8 +453,8 @@ int main() {
     pointLight.specular = glm::vec3(1.0, 1.0, 1.0);
 
     pointLight.constant = 1.0f;
-    pointLight.linear = 0.09f;
-    pointLight.quadratic = 0.032f;
+    pointLight.linear = 0.002f;
+    pointLight.quadratic = 0.000032f;
 
 
 
@@ -343,6 +503,9 @@ int main() {
         platoShader.setVec3("l.ambient", 0.2f, 0.2f, 0.2f);
         platoShader.setVec3("l.diffuse", 0.5, 0.5, 0.5);
         platoShader.setVec3("l.specular", 1.0f, 1.0f, 1.0f);
+        platoShader.setFloat("l.constant", pointLight.constant);
+        platoShader.setFloat("l.linear", pointLight.linear);
+        platoShader.setFloat("l.quadratic", pointLight.quadratic);
 
         // material properties
         platoShader.setInt("m.diffuse", 0);
@@ -367,21 +530,74 @@ int main() {
             }
         }
 
-        modelShader.use();
-        modelShader.setMat4("view", view);
-        modelShader.setMat4("projection", projection);
         glm::mat4 model = glm::mat4 (1.0f);
-        model = glm::translate(model, glm::vec3(10.0f, 1.5f, -8.0f));
-        model = glm::scale(model, glm::vec3(3.2f));
-        modelShader.setMat4("model", model);
-        ourModel.Draw(modelShader);
+        platoShader.setMat4("model", model);
+        treeAModel.Draw(platoShader);
 
-        model = glm::mat4 (1.0f);
-        model = glm::translate(model, glm::vec3(28.0f, 1.5f, -26.0f));
-        model = glm::scale(model, glm::vec3(3.2f));
-        modelShader.setMat4("model", model);
-        ourModel.Draw(modelShader);
+        instanceShader.use();
+        instanceShader.setMat4("view", view);
+        instanceShader.setMat4("projection", projection);
+        instanceShader.setInt("texture_diffuse1", 0);
+        glActiveTexture(GL_TEXTURE0);
+        //amanita
+        glBindTexture(GL_TEXTURE_2D, amanitaModel.textures_loaded[0].id);
+        for (unsigned int i = 0; i < amanitaModel.meshes.size(); i++)
+        {
+            glBindVertexArray(amanitaModel.meshes[i].VAO);
+            glDrawElementsInstanced(GL_TRIANGLES, amanitaModel.meshes[i].indices.size(), GL_UNSIGNED_INT, 0, amanitaNum);
+            glBindVertexArray(0);
+        }
 
+        //ambrela
+        glBindTexture(GL_TEXTURE_2D, ambrelaModel.textures_loaded[0].id);
+        for (unsigned int i = 0; i < ambrelaModel.meshes.size(); i++)
+        {
+            glBindVertexArray(ambrelaModel.meshes[i].VAO);
+            glDrawElementsInstanced(GL_TRIANGLES, ambrelaModel.meshes[i].indices.size(), GL_UNSIGNED_INT, 0, ambrelaNum);
+            glBindVertexArray(0);
+        }
+
+        //boletus
+        glBindTexture(GL_TEXTURE_2D, boletusModel.textures_loaded[0].id);
+        for (unsigned int i = 0; i < boletusModel.meshes.size(); i++)
+        {
+            glBindVertexArray(boletusModel.meshes[i].VAO);
+            glDrawElementsInstanced(GL_TRIANGLES, boletusModel.meshes[i].indices.size(), GL_UNSIGNED_INT, 0, boletusNum);
+            glBindVertexArray(0);
+        }
+        //chantarell
+                glBindTexture(GL_TEXTURE_2D, chantarellModel.textures_loaded[0].id);
+        for (unsigned int i = 0; i < chantarellModel.meshes.size(); i++)
+        {
+            glBindVertexArray(chantarellModel.meshes[i].VAO);
+            glDrawElementsInstanced(GL_TRIANGLES, chantarellModel.meshes[i].indices.size(), GL_UNSIGNED_INT, 0, chantarellNum);
+            glBindVertexArray(0);
+        }
+        //morel
+        glBindTexture(GL_TEXTURE_2D, morelModel.textures_loaded[0].id);
+        for (unsigned int i = 0; i < morelModel.meshes.size(); i++)
+        {
+            glBindVertexArray(morelModel.meshes[i].VAO);
+            glDrawElementsInstanced(GL_TRIANGLES, morelModel.meshes[i].indices.size(), GL_UNSIGNED_INT, 0, morelNum);
+            glBindVertexArray(0);
+        }
+        //russula
+        glBindTexture(GL_TEXTURE_2D, russulaModel.textures_loaded[0].id);
+        for (unsigned int i = 0; i < russulaModel.meshes.size(); i++)
+        {
+            glBindVertexArray(russulaModel.meshes[i].VAO);
+            glDrawElementsInstanced(GL_TRIANGLES, russulaModel.meshes[i].indices.size(), GL_UNSIGNED_INT, 0, russulaNum);
+            glBindVertexArray(0);
+        }
+
+        //treeA
+        glBindTexture(GL_TEXTURE_2D, treeAModel.textures_loaded[0].id);
+        for (unsigned int i = 0; i < treeAModel.meshes.size(); i++)
+        {
+            glBindVertexArray(treeAModel.meshes[i].VAO);
+            glDrawElementsInstanced(GL_TRIANGLES, treeAModel.meshes[i].indices.size(), GL_UNSIGNED_INT, 0, treeANum);
+            glBindVertexArray(0);
+        }
 
         //draw sky box
         glDepthFunc(GL_LEQUAL);
@@ -546,5 +762,35 @@ unsigned int loadCubemap(vector<std::string> faces){
         glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     }
     return t_id;
+}
+
+void configurate_instance_buffer(unsigned int num, Model model, glm::mat4 *modelMatrices){
+    //configurate instance array
+    unsigned int buffer;
+    glGenBuffers(1, &buffer);
+    glBindBuffer(GL_ARRAY_BUFFER, buffer);
+    glBufferData(GL_ARRAY_BUFFER, num*sizeof(glm::mat4), &modelMatrices[0], GL_STATIC_DRAW);
+
+    for (unsigned int i = 0; i < model.meshes.size(); i++)
+    {
+        unsigned int VAO = model.meshes[i].VAO;
+        glBindVertexArray(VAO);
+        // set attribute pointers for matrix (4 times vec4)
+        glEnableVertexAttribArray(3);
+        glVertexAttribPointer(3, 4, GL_FLOAT, GL_FALSE, sizeof(glm::mat4), (void*)0);
+        glEnableVertexAttribArray(4);
+        glVertexAttribPointer(4, 4, GL_FLOAT, GL_FALSE, sizeof(glm::mat4), (void*)(sizeof(glm::vec4)));
+        glEnableVertexAttribArray(5);
+        glVertexAttribPointer(5, 4, GL_FLOAT, GL_FALSE, sizeof(glm::mat4), (void*)(2 * sizeof(glm::vec4)));
+        glEnableVertexAttribArray(6);
+        glVertexAttribPointer(6, 4, GL_FLOAT, GL_FALSE, sizeof(glm::mat4), (void*)(3 * sizeof(glm::vec4)));
+
+        glVertexAttribDivisor(3, 1);
+        glVertexAttribDivisor(4, 1);
+        glVertexAttribDivisor(5, 1);
+        glVertexAttribDivisor(6, 1);
+
+        glBindVertexArray(0);
+    }
 }
 

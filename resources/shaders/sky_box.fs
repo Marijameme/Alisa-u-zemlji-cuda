@@ -8,4 +8,5 @@ uniform samplerCube skybox;
 void main()
 {
     FragColor = texture(skybox, TexCoords);
+    //there is no point in implementing blending in this shader
 }

@@ -16,32 +16,39 @@
 #include <iostream>
 
 class Texture2D{
-    unsigned int m_id;
-    unsigned int texture;
+   unsigned int texture;
 public:
     Texture2D(std::string path, GLenum sampling, GLenum filtering){
         glGenTextures(1, &texture);
-        glBindTexture(GL_TEXTURE_2D, texture);
-
-        //wrap
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-
-        //filter
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
         //load image
         int width, height, nChannel;
-        unsigned char *data = stbi_load(FileSystem::getPath("resources/textures/grass_texture.jpg").c_str()
+        unsigned char *data = stbi_load(FileSystem::getPath(path).c_str()
                 , &width, &height, &nChannel, 0);
+
         if(data){
             std::cout << "Teksura je uspesno ucitana\n";
-            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+            GLenum format;
+            if (nChannel == 1)
+                format = GL_RED;
+            else if (nChannel == 3)
+                format = GL_RGB;
+            else if (nChannel == 4)
+                format = GL_RGBA;
+
+            glBindTexture(GL_TEXTURE_2D, texture);
+            glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, data);
             glGenerateMipmap(GL_TEXTURE_2D);
+
+            //wrap
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, format == GL_RGBA ? GL_CLAMP_TO_EDGE : sampling);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, format == GL_RGBA ? GL_CLAMP_TO_EDGE : sampling);
+
+            //filter
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, filtering);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, filtering);
         }
         else{
-            ASSERT(false, "Failed to load grass texture!\n");
+            ASSERT(false, "Failed to load texture!\n");
         }
         stbi_image_free(data);
     }

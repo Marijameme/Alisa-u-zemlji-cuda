@@ -187,6 +187,7 @@ private:
     vector<Texture> loadMaterialTextures(aiMaterial *mat, aiTextureType type, string typeName)
     {
         vector<Texture> textures;
+//        std::cout << "objekat " << typeName <<  " ima " << mat->GetTextureCount((type)) <<" teksturea\n";
         for(unsigned int i = 0; i < mat->GetTextureCount(type); i++)
         {
             aiString str;

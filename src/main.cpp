@@ -30,7 +30,8 @@ void key_callback(GLFWwindow *window, int key, int scancode, int action, int mod
 
 unsigned int loadCubemap(std::vector<std::string> faces);
 
-void configurate_instance_buffer(unsigned int num, Model model, glm::mat4 *modelMatrices);
+void configurate_instance_buffer(unsigned int num, Model model, glm::mat4 *modelMatrices, bool normal_mapping);
+
 
 // settings
 const unsigned int SCR_WIDTH = 800;
@@ -172,6 +173,8 @@ int main() {
     Shader platoShader("resources/shaders/plato.vs", "resources/shaders/plato.fs");
     Shader skyBoxShader("resources/shaders/sky_box.vs", "resources/shaders/sky_box.fs");
     Shader instanceShader("resources/shaders/instance.vs", "resources/shaders/instance.fs");
+    Shader normalShader("resources/shaders/normal.vs", "resources/shaders/normal.fs");
+
     // load models
     // -----------
     Model amanitaModel("resources/objects/amanita/amanita_a_low.obj");
@@ -186,13 +189,10 @@ int main() {
     morelModel.SetShaderTextureNamePrefix("materal.");
     Model russulaModel("resources/objects/russula/russula_low.obj");
     russulaModel.SetShaderTextureNamePrefix("material.");
-    Model treeBModel("resources/objects/trees/picea_rubens.obj");
-    treeBModel.SetShaderTextureNamePrefix("material.");
-    Model treeAModel("resources/objects/trees/red_spruce_a.obj");
-    treeAModel.SetShaderTextureNamePrefix("matrial.");
-    Model treeCModel("resources/objects/trees/red_spruce_b.obj");
-    treeCModel.SetShaderTextureNamePrefix("material.");
+    Model rock5Model("resources/objects/Rock_5/Rock_5.obj");
+    rock5Model.SetShaderTextureNamePrefix("material.");
 
+    bool normal_mapping = false;
     //create model matrices for amanita
     unsigned int amanitaNum = 8;
     glm::mat4* amanitaModelMatrises;
@@ -215,7 +215,7 @@ int main() {
         model = glm::scale(model, glm::vec3(3.2f));
         amanitaModelMatrises[i] = model;
     }
-    configurate_instance_buffer(amanitaNum, amanitaModel, amanitaModelMatrises);
+    configurate_instance_buffer(amanitaNum, amanitaModel, amanitaModelMatrises, normal_mapping);
 
     //create model matrices for amabrela
     unsigned int ambrelaNum = 4;
@@ -234,7 +234,7 @@ int main() {
         model = glm::scale(model, glm::vec3(3.2f));
         ambrelaModelMatrises[i] = model;
     }
-    configurate_instance_buffer(ambrelaNum, ambrelaModel, ambrelaModelMatrises);
+    configurate_instance_buffer(ambrelaNum, ambrelaModel, ambrelaModelMatrises, normal_mapping);
 
     //create model matrices for boletus
     unsigned int boletusNum = 4;
@@ -253,7 +253,7 @@ int main() {
         model = glm::scale(model, glm::vec3(3.2f));
         boletusModelMatrises[i] = model;
     }
-    configurate_instance_buffer(boletusNum, boletusModel, boletusModelMatrises);
+    configurate_instance_buffer(boletusNum, boletusModel, boletusModelMatrises, normal_mapping);
 
     //create model matrices for chantarell
     unsigned int chantarellNum = 5;
@@ -273,7 +273,7 @@ int main() {
         model = glm::scale(model, glm::vec3(3.2f));
         chantarellModelMatrises[i] = model;
     }
-    configurate_instance_buffer(chantarellNum, chantarellModel, chantarellModelMatrises);
+    configurate_instance_buffer(chantarellNum, chantarellModel, chantarellModelMatrises, normal_mapping);
 
 
     //create model matrices for morel
@@ -294,7 +294,7 @@ int main() {
         model = glm::scale(model, glm::vec3(3.2f));
         morelModelMatrises[i] = model;
     }
-    configurate_instance_buffer(morelNum, morelModel, morelModelMatrises);
+    configurate_instance_buffer(morelNum, morelModel, morelModelMatrises, normal_mapping);
 
     //create model matrices for russula
     unsigned int russulaNum = 7;
@@ -316,27 +316,27 @@ int main() {
         model = glm::scale(model, glm::vec3(3.2f));
         russulaModelMatrises[i] = model;
     }
-    configurate_instance_buffer(russulaNum, russulaModel, russulaModelMatrises);
+    configurate_instance_buffer(russulaNum, russulaModel, russulaModelMatrises, normal_mapping);
 
     //create model matrices for treeA
-    unsigned int treeANum = 5;
-    glm::mat4* treeAModelMatrises;
-    treeAModelMatrises = new glm::mat4[treeANum];
-    glm::vec3 treeATranslations[] = {
-            glm::vec3(40.0f, 1.0f, -10.0f),
-            glm::vec3(35.5f, 1.0f, -6.0f),
-            glm::vec3(20.0f, 1.0f, -8.0f),
-            glm::vec3(15.0f, 1.0f, -7.0f),
-            glm::vec3(15.5f, 1.0f, -30.5)
-    };
-
-    for(unsigned int i = 0; i < treeANum; i++){
-        glm::mat4 model = glm::mat4 (1.0f);
-        model = glm::translate(model, treeATranslations[i]);
-        model = glm::scale(model, glm::vec3(1.2f));
-        treeAModelMatrises[i] = model;
-    }
-    configurate_instance_buffer(treeANum, treeAModel, treeAModelMatrises);
+//    unsigned int treeANum = 5;
+//    glm::mat4* treeAModelMatrises;
+//    treeAModelMatrises = new glm::mat4[treeANum];
+//    glm::vec3 treeATranslations[] = {
+//            glm::vec3(40.0f, 1.0f, -10.0f),
+//            glm::vec3(35.5f, 1.0f, -6.0f),
+//            glm::vec3(20.0f, 1.0f, -8.0f),
+//            glm::vec3(15.0f, 1.0f, -7.0f),
+//            glm::vec3(15.5f, 1.0f, -30.5)
+//    };
+//
+//    for(unsigned int i = 0; i < treeANum; i++){
+//        glm::mat4 model = glm::mat4 (1.0f);
+//        model = glm::translate(model, treeATranslations[i]);
+//        model = glm::scale(model, glm::vec3(1.2f));
+//        treeAModelMatrises[i] = model;
+//    }
+//    configurate_instance_buffer(treeANum, treeAModel, treeAModelMatrises, normal_mapping);
 
     /*****/
     //vertexes
@@ -432,6 +432,7 @@ int main() {
     //load and create textures
     Texture2D grassDiffuse("resources/textures/grass_texture.jpg", GL_REPEAT, GL_LINEAR);
     Texture2D grassSpecular("resources/textures/grass_specular.jpg", GL_REPEAT, GL_LINEAR);
+    Texture2D bloodSplatter("resources/textures/blood-splatter-png-44474.png", GL_REPEAT, GL_CLAMP_TO_EDGE);
     vector<std::string> faces
             {
                     "resources/textures/Apocalypse/vz_apocalypse_right.png",
@@ -448,7 +449,7 @@ int main() {
 
     PointLight& pointLight = programState->pointLight;
     pointLight.position = glm::vec3(4.0f, 4.0, 0.0);
-    pointLight.ambient = glm::vec3(0.1, 0.1, 0.1);
+    pointLight.ambient = glm::vec3(0.2, 0.2, 0.2);
     pointLight.diffuse = glm::vec3(0.6, 0.6, 0.6);
     pointLight.specular = glm::vec3(1.0, 1.0, 1.0);
 
@@ -491,8 +492,6 @@ int main() {
                                                 (float) SCR_WIDTH / (float) SCR_HEIGHT, 0.1f, 100.0f);
         glm::mat4 view = programState->camera.GetViewMatrix();
 
-        // render the loaded model
-
         platoShader.use();
         platoShader.setMat4("projection", projection);
         platoShader.setMat4("view", view);
@@ -508,18 +507,18 @@ int main() {
         platoShader.setFloat("l.quadratic", pointLight.quadratic);
 
         // material properties
-        platoShader.setInt("m.diffuse", 0);
-        platoShader.setInt("m.specular", 1);
-        platoShader.setFloat("m.shininess", 64.0f);
+        platoShader.setInt("material.diffuse", 0);
+        platoShader.setInt("material.specular", 1);
+        platoShader.setFloat("material.shininess", 64.0f);
 
-        glActiveTexture(GL_TEXTURE0);
-        grassDiffuse.bind();
-        glActiveTexture(GL_TEXTURE1);
-        grassSpecular.bind();
 
         glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
         //draw plato
         glBindVertexArray(VAO);
+        glActiveTexture(GL_TEXTURE0);
+        grassDiffuse.bind();
+        glActiveTexture(GL_TEXTURE1);
+        grassSpecular.bind();
         for(int i = 0; i < 50; i++) {
             for (int j = 0; j < 50; j++) {
                 glm::mat4 model = glm::mat4(1.0f);
@@ -530,17 +529,38 @@ int main() {
             }
         }
 
-        glm::mat4 model = glm::mat4 (1.0f);
-        platoShader.setMat4("model", model);
-        treeAModel.Draw(platoShader);
+        //draw blood
+        glActiveTexture(GL_TEXTURE0);
+        bloodSplatter.bind();
+        for(int i = 0; i < 50; i++){
+            glm::mat4 model = glm::mat4(1.0f);
+            model = glm::translate(model, glm::vec3(i, 1.1, -i));
+            model = glm::rotate(model, glm::radians(90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+            platoShader.setMat4("model", model);
+            glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+        }
 
         instanceShader.use();
+        instanceShader.setVec3("l.position", pointLight.position);
+        instanceShader.setVec3("l.ambient", 0.2f, 0.2f, 0.2f);
+        instanceShader.setVec3("l.diffuse", 0.5, 0.5, 0.5);
+        instanceShader.setVec3("l.specular", 1.0f, 1.0f, 1.0f);
+        instanceShader.setFloat("l.constant", pointLight.constant);
+        instanceShader.setFloat("l.linear", pointLight.linear);
+        instanceShader.setFloat("l.quadratic", pointLight.quadratic);
         instanceShader.setMat4("view", view);
         instanceShader.setMat4("projection", projection);
-        instanceShader.setInt("texture_diffuse1", 0);
-        glActiveTexture(GL_TEXTURE0);
+        instanceShader.setInt("material.texture_diffuse", 0);
+        instanceShader.setInt("material.texture_specular", 1);
+        instanceShader.setInt("material.texture_normal", 2);
+
         //amanita
+        glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, amanitaModel.textures_loaded[0].id);
+        glActiveTexture(GL_TEXTURE1);
+        glBindTexture(GL_TEXTURE_2D, amanitaModel.textures_loaded[1].id);
+        glActiveTexture(GL_TEXTURE2);
+        glBindTexture(GL_TEXTURE_2D, amanitaModel.textures_loaded[2].id);
         for (unsigned int i = 0; i < amanitaModel.meshes.size(); i++)
         {
             glBindVertexArray(amanitaModel.meshes[i].VAO);
@@ -549,7 +569,12 @@ int main() {
         }
 
         //ambrela
+        glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, ambrelaModel.textures_loaded[0].id);
+        glActiveTexture(GL_TEXTURE1);
+        glBindTexture(GL_TEXTURE_2D, ambrelaModel.textures_loaded[1].id);
+        glActiveTexture(GL_TEXTURE2);
+        glBindTexture(GL_TEXTURE_2D, ambrelaModel.textures_loaded[2].id);
         for (unsigned int i = 0; i < ambrelaModel.meshes.size(); i++)
         {
             glBindVertexArray(ambrelaModel.meshes[i].VAO);
@@ -558,7 +583,12 @@ int main() {
         }
 
         //boletus
+        glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, boletusModel.textures_loaded[0].id);
+        glActiveTexture(GL_TEXTURE1);
+        glBindTexture(GL_TEXTURE_2D, boletusModel.textures_loaded[1].id);
+        glActiveTexture(GL_TEXTURE2);
+        glBindTexture(GL_TEXTURE_2D, boletusModel.textures_loaded[2].id);
         for (unsigned int i = 0; i < boletusModel.meshes.size(); i++)
         {
             glBindVertexArray(boletusModel.meshes[i].VAO);
@@ -566,7 +596,12 @@ int main() {
             glBindVertexArray(0);
         }
         //chantarell
-                glBindTexture(GL_TEXTURE_2D, chantarellModel.textures_loaded[0].id);
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, chantarellModel.textures_loaded[0].id);
+        glActiveTexture(GL_TEXTURE1);
+        glBindTexture(GL_TEXTURE_2D, chantarellModel.textures_loaded[1].id);
+        glActiveTexture(GL_TEXTURE2);
+        glBindTexture(GL_TEXTURE_2D, chantarellModel.textures_loaded[2].id);
         for (unsigned int i = 0; i < chantarellModel.meshes.size(); i++)
         {
             glBindVertexArray(chantarellModel.meshes[i].VAO);
@@ -574,7 +609,12 @@ int main() {
             glBindVertexArray(0);
         }
         //morel
+        glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, morelModel.textures_loaded[0].id);
+        glActiveTexture(GL_TEXTURE1);
+        glBindTexture(GL_TEXTURE_2D, morelModel.textures_loaded[1].id);
+        glActiveTexture(GL_TEXTURE2);
+        glBindTexture(GL_TEXTURE_2D, morelModel.textures_loaded[2].id);
         for (unsigned int i = 0; i < morelModel.meshes.size(); i++)
         {
             glBindVertexArray(morelModel.meshes[i].VAO);
@@ -582,7 +622,12 @@ int main() {
             glBindVertexArray(0);
         }
         //russula
+        glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, russulaModel.textures_loaded[0].id);
+        glActiveTexture(GL_TEXTURE1);
+        glBindTexture(GL_TEXTURE_2D, russulaModel.textures_loaded[1].id);
+        glActiveTexture(GL_TEXTURE2);
+        glBindTexture(GL_TEXTURE_2D, russulaModel.textures_loaded[2].id);
         for (unsigned int i = 0; i < russulaModel.meshes.size(); i++)
         {
             glBindVertexArray(russulaModel.meshes[i].VAO);
@@ -590,15 +635,17 @@ int main() {
             glBindVertexArray(0);
         }
 
-        //treeA
-        glBindTexture(GL_TEXTURE_2D, treeAModel.textures_loaded[0].id);
-        for (unsigned int i = 0; i < treeAModel.meshes.size(); i++)
-        {
-            glBindVertexArray(treeAModel.meshes[i].VAO);
-            glDrawElementsInstanced(GL_TRIANGLES, treeAModel.meshes[i].indices.size(), GL_UNSIGNED_INT, 0, treeANum);
-            glBindVertexArray(0);
-        }
-
+        normalShader.use();
+        normalShader.setVec3("viewPos", programState->camera.Position);
+        normalShader.setFloat("material.shininess", 32.0f);
+        normalShader.setVec3("light.direction", pointLight.position);
+        normalShader.setVec3("light.ambient", pointLight.ambient);
+        normalShader.setVec3("light.diffuse", pointLight.diffuse);
+        normalShader.setVec3("light.specular", pointLight.specular);
+        normalShader.setFloat("light.constant", pointLight.constant);
+        normalShader.setFloat("light.linear", pointLight.linear);
+        normalShader.setFloat("light.quadratic", pointLight.quadratic);
+        rock5Model.Draw(normalShader);
         //draw sky box
         glDepthFunc(GL_LEQUAL);
         skyBoxShader.use();
@@ -764,7 +811,7 @@ unsigned int loadCubemap(vector<std::string> faces){
     return t_id;
 }
 
-void configurate_instance_buffer(unsigned int num, Model model, glm::mat4 *modelMatrices){
+void configurate_instance_buffer(unsigned int num, Model model, glm::mat4 *modelMatrices, bool normal_mapping){
     //configurate instance array
     unsigned int buffer;
     glGenBuffers(1, &buffer);
@@ -776,21 +823,38 @@ void configurate_instance_buffer(unsigned int num, Model model, glm::mat4 *model
         unsigned int VAO = model.meshes[i].VAO;
         glBindVertexArray(VAO);
         // set attribute pointers for matrix (4 times vec4)
-        glEnableVertexAttribArray(3);
-        glVertexAttribPointer(3, 4, GL_FLOAT, GL_FALSE, sizeof(glm::mat4), (void*)0);
-        glEnableVertexAttribArray(4);
-        glVertexAttribPointer(4, 4, GL_FLOAT, GL_FALSE, sizeof(glm::mat4), (void*)(sizeof(glm::vec4)));
-        glEnableVertexAttribArray(5);
-        glVertexAttribPointer(5, 4, GL_FLOAT, GL_FALSE, sizeof(glm::mat4), (void*)(2 * sizeof(glm::vec4)));
-        glEnableVertexAttribArray(6);
-        glVertexAttribPointer(6, 4, GL_FLOAT, GL_FALSE, sizeof(glm::mat4), (void*)(3 * sizeof(glm::vec4)));
+        if(normal_mapping == false) {
+            glEnableVertexAttribArray(3);
+            glVertexAttribPointer(3, 4, GL_FLOAT, GL_FALSE, sizeof(glm::mat4), (void *) 0);
+            glEnableVertexAttribArray(4);
+            glVertexAttribPointer(4, 4, GL_FLOAT, GL_FALSE, sizeof(glm::mat4), (void *) (sizeof(glm::vec4)));
+            glEnableVertexAttribArray(5);
+            glVertexAttribPointer(5, 4, GL_FLOAT, GL_FALSE, sizeof(glm::mat4), (void *) (2 * sizeof(glm::vec4)));
+            glEnableVertexAttribArray(6);
+            glVertexAttribPointer(6, 4, GL_FLOAT, GL_FALSE, sizeof(glm::mat4), (void *) (3 * sizeof(glm::vec4)));
 
-        glVertexAttribDivisor(3, 1);
-        glVertexAttribDivisor(4, 1);
-        glVertexAttribDivisor(5, 1);
-        glVertexAttribDivisor(6, 1);
+            glVertexAttribDivisor(3, 1);
+            glVertexAttribDivisor(4, 1);
+            glVertexAttribDivisor(5, 1);
+            glVertexAttribDivisor(6, 1);
+        }else{
+            glEnableVertexAttribArray(5);
+            glVertexAttribPointer(5, 4, GL_FLOAT, GL_FALSE, sizeof(glm::mat4), (void*)0);
+            glEnableVertexAttribArray(6);
+            glVertexAttribPointer(6, 4, GL_FLOAT, GL_FALSE, sizeof(glm::mat4), (void*)(sizeof(glm::vec4)));
+            glEnableVertexAttribArray(7);
+            glVertexAttribPointer(7, 4, GL_FLOAT, GL_FALSE, sizeof(glm::mat4), (void*)(2 * sizeof(glm::vec4)));
+            glEnableVertexAttribArray(8);
+            glVertexAttribPointer(8, 4, GL_FLOAT, GL_FALSE, sizeof(glm::mat4), (void*)(3 * sizeof(glm::vec4)));
+
+            glVertexAttribDivisor(5, 1);
+            glVertexAttribDivisor(6, 1);
+            glVertexAttribDivisor(7, 1);
+            glVertexAttribDivisor(8, 1);
+        }
 
         glBindVertexArray(0);
     }
 }
+
 

@@ -32,6 +32,7 @@ unsigned int loadCubemap(std::vector<std::string> faces);
 
 void configurate_instance_buffer(unsigned int num, Model model, glm::mat4 *modelMatrices, bool normal_mapping);
 
+void draw_instanced(Model model, unsigned int num);
 
 // settings
 const unsigned int SCR_WIDTH = 800;
@@ -57,6 +58,7 @@ struct PointLight {
     float linear;
     float quadratic;
 };
+void setup_shader_light(Shader shader, PointLight pointLight);
 
 struct ProgramState {
     glm::vec3 clearColor = glm::vec3(0);
@@ -173,7 +175,7 @@ int main() {
     Shader platoShader("resources/shaders/plato.vs", "resources/shaders/plato.fs");
     Shader skyBoxShader("resources/shaders/sky_box.vs", "resources/shaders/sky_box.fs");
     Shader instanceShader("resources/shaders/instance.vs", "resources/shaders/instance.fs");
-    Shader normalShader("resources/shaders/normal.vs", "resources/shaders/normal.fs");
+    Shader modelShader("resources/shaders/model.vs", "resources/shaders/model.fs");
 
     // load models
     // -----------
@@ -189,8 +191,12 @@ int main() {
     morelModel.SetShaderTextureNamePrefix("materal.");
     Model russulaModel("resources/objects/russula/russula_low.obj");
     russulaModel.SetShaderTextureNamePrefix("material.");
-    Model rock5Model("resources/objects/Rock_5/Rock_5.obj");
-    rock5Model.SetShaderTextureNamePrefix("material.");
+    Model catModel("resources/objects/cat/12221_Cat_v1_l3.obj");
+    catModel.SetShaderTextureNamePrefix("material.");
+    Model flamingoModel("resources/objects/flamingo/19376_PinkFlamingo_V1.obj");
+    flamingoModel.SetShaderTextureNamePrefix("material.");
+    Model rabbitModel("resources/objects/rabbit/Rabbit.obj");
+    rabbitModel.SetShaderTextureNamePrefix("material.");
 
     bool normal_mapping = false;
     //create model matrices for amanita
@@ -198,13 +204,13 @@ int main() {
     glm::mat4* amanitaModelMatrises;
     amanitaModelMatrises = new glm::mat4[amanitaNum];
     glm::vec3 amanitaTranslations[] = {
-            glm::vec3(23.5f, 1.5f, -4.0f),
+            glm::vec3(2.5f, 1.5f, -4.0f),
             glm::vec3(36.5f, 1.5f, -7.5f),
             glm::vec3(30.0f, 1.5f, -15.0f),
             glm::vec3(33.3f, 1.5f, -19.0f),
             glm::vec3(37.5f, 1.5f, -21.5f),
             glm::vec3(19.5f, 1.5f, -7.6f),
-            glm::vec3(30.0f, 1.5f, -30.0f),
+            glm::vec3(35.0f, 1.5f, -30.0f),
             glm::vec3(19.5f, 1.5f, -32.5f),
 
     };
@@ -318,25 +324,6 @@ int main() {
     }
     configurate_instance_buffer(russulaNum, russulaModel, russulaModelMatrises, normal_mapping);
 
-    //create model matrices for treeA
-//    unsigned int treeANum = 5;
-//    glm::mat4* treeAModelMatrises;
-//    treeAModelMatrises = new glm::mat4[treeANum];
-//    glm::vec3 treeATranslations[] = {
-//            glm::vec3(40.0f, 1.0f, -10.0f),
-//            glm::vec3(35.5f, 1.0f, -6.0f),
-//            glm::vec3(20.0f, 1.0f, -8.0f),
-//            glm::vec3(15.0f, 1.0f, -7.0f),
-//            glm::vec3(15.5f, 1.0f, -30.5)
-//    };
-//
-//    for(unsigned int i = 0; i < treeANum; i++){
-//        glm::mat4 model = glm::mat4 (1.0f);
-//        model = glm::translate(model, treeATranslations[i]);
-//        model = glm::scale(model, glm::vec3(1.2f));
-//        treeAModelMatrises[i] = model;
-//    }
-//    configurate_instance_buffer(treeANum, treeAModel, treeAModelMatrises, normal_mapping);
 
     /*****/
     //vertexes
@@ -498,17 +485,10 @@ int main() {
         platoShader.setVec3("viewPos", programState->camera.Position);
 
         // light properties
-        platoShader.setVec3("l.position", pointLight.position);
-        platoShader.setVec3("l.ambient", 0.2f, 0.2f, 0.2f);
-        platoShader.setVec3("l.diffuse", 0.5, 0.5, 0.5);
-        platoShader.setVec3("l.specular", 1.0f, 1.0f, 1.0f);
-        platoShader.setFloat("l.constant", pointLight.constant);
-        platoShader.setFloat("l.linear", pointLight.linear);
-        platoShader.setFloat("l.quadratic", pointLight.quadratic);
-
+        setup_shader_light(platoShader, pointLight);
         // material properties
-        platoShader.setInt("material.diffuse", 0);
-        platoShader.setInt("material.specular", 1);
+        platoShader.setInt("material.texture_diffuse1", 0);
+        platoShader.setInt("material.texture_specular1", 1);
         platoShader.setFloat("material.shininess", 64.0f);
 
 
@@ -540,14 +520,33 @@ int main() {
             glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
         }
 
+        modelShader.use();
+        modelShader.setMat4("view", view);
+        modelShader.setMat4("projection", projection);
+        setup_shader_light(modelShader, pointLight);
+
+        glm::mat4 model = glm::mat4(1.0f);
+        model = glm::translate(model, glm::vec3(10.0, 1.0, -21.0));
+        model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(1.0, 0.0, 0.0));
+        model = glm::scale(model, glm::vec3(0.05, 0.05, 0.05));
+        modelShader.setMat4("model", model);
+        catModel.Draw(modelShader);
+
+        model = glm::mat4(1.0f);
+        model = glm::translate(model, glm::vec3(12.0, 1.0, -3.0));
+        model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(1.0, 0.0, 0.0));
+        model = glm::scale(model, glm::vec3(0.05, 0.05, 0.05));
+        modelShader.setMat4("model", model);
+        flamingoModel.Draw(modelShader);
+
+        model = glm::mat4(1.0f);
+        model = glm::translate(model, glm::vec3(10.0, 1.0, -12.0));;
+        model = glm::scale(model, glm::vec3(0.05, 0.05, 0.05));
+        modelShader.setMat4("model", model);
+        rabbitModel.Draw(modelShader);
+
         instanceShader.use();
-        instanceShader.setVec3("l.position", pointLight.position);
-        instanceShader.setVec3("l.ambient", 0.2f, 0.2f, 0.2f);
-        instanceShader.setVec3("l.diffuse", 0.5, 0.5, 0.5);
-        instanceShader.setVec3("l.specular", 1.0f, 1.0f, 1.0f);
-        instanceShader.setFloat("l.constant", pointLight.constant);
-        instanceShader.setFloat("l.linear", pointLight.linear);
-        instanceShader.setFloat("l.quadratic", pointLight.quadratic);
+        setup_shader_light(instanceShader, pointLight);
         instanceShader.setMat4("view", view);
         instanceShader.setMat4("projection", projection);
         instanceShader.setInt("material.texture_diffuse", 0);
@@ -555,97 +554,19 @@ int main() {
         instanceShader.setInt("material.texture_normal", 2);
 
         //amanita
-        glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, amanitaModel.textures_loaded[0].id);
-        glActiveTexture(GL_TEXTURE1);
-        glBindTexture(GL_TEXTURE_2D, amanitaModel.textures_loaded[1].id);
-        glActiveTexture(GL_TEXTURE2);
-        glBindTexture(GL_TEXTURE_2D, amanitaModel.textures_loaded[2].id);
-        for (unsigned int i = 0; i < amanitaModel.meshes.size(); i++)
-        {
-            glBindVertexArray(amanitaModel.meshes[i].VAO);
-            glDrawElementsInstanced(GL_TRIANGLES, amanitaModel.meshes[i].indices.size(), GL_UNSIGNED_INT, 0, amanitaNum);
-            glBindVertexArray(0);
-        }
-
+        draw_instanced(amanitaModel, amanitaNum);
         //ambrela
-        glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, ambrelaModel.textures_loaded[0].id);
-        glActiveTexture(GL_TEXTURE1);
-        glBindTexture(GL_TEXTURE_2D, ambrelaModel.textures_loaded[1].id);
-        glActiveTexture(GL_TEXTURE2);
-        glBindTexture(GL_TEXTURE_2D, ambrelaModel.textures_loaded[2].id);
-        for (unsigned int i = 0; i < ambrelaModel.meshes.size(); i++)
-        {
-            glBindVertexArray(ambrelaModel.meshes[i].VAO);
-            glDrawElementsInstanced(GL_TRIANGLES, ambrelaModel.meshes[i].indices.size(), GL_UNSIGNED_INT, 0, ambrelaNum);
-            glBindVertexArray(0);
-        }
-
+        draw_instanced(ambrelaModel, ambrelaNum);
         //boletus
-        glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, boletusModel.textures_loaded[0].id);
-        glActiveTexture(GL_TEXTURE1);
-        glBindTexture(GL_TEXTURE_2D, boletusModel.textures_loaded[1].id);
-        glActiveTexture(GL_TEXTURE2);
-        glBindTexture(GL_TEXTURE_2D, boletusModel.textures_loaded[2].id);
-        for (unsigned int i = 0; i < boletusModel.meshes.size(); i++)
-        {
-            glBindVertexArray(boletusModel.meshes[i].VAO);
-            glDrawElementsInstanced(GL_TRIANGLES, boletusModel.meshes[i].indices.size(), GL_UNSIGNED_INT, 0, boletusNum);
-            glBindVertexArray(0);
-        }
+        draw_instanced(boletusModel, boletusNum);
         //chantarell
-        glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, chantarellModel.textures_loaded[0].id);
-        glActiveTexture(GL_TEXTURE1);
-        glBindTexture(GL_TEXTURE_2D, chantarellModel.textures_loaded[1].id);
-        glActiveTexture(GL_TEXTURE2);
-        glBindTexture(GL_TEXTURE_2D, chantarellModel.textures_loaded[2].id);
-        for (unsigned int i = 0; i < chantarellModel.meshes.size(); i++)
-        {
-            glBindVertexArray(chantarellModel.meshes[i].VAO);
-            glDrawElementsInstanced(GL_TRIANGLES, chantarellModel.meshes[i].indices.size(), GL_UNSIGNED_INT, 0, chantarellNum);
-            glBindVertexArray(0);
-        }
+        draw_instanced(chantarellModel, chantarellNum);
         //morel
-        glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, morelModel.textures_loaded[0].id);
-        glActiveTexture(GL_TEXTURE1);
-        glBindTexture(GL_TEXTURE_2D, morelModel.textures_loaded[1].id);
-        glActiveTexture(GL_TEXTURE2);
-        glBindTexture(GL_TEXTURE_2D, morelModel.textures_loaded[2].id);
-        for (unsigned int i = 0; i < morelModel.meshes.size(); i++)
-        {
-            glBindVertexArray(morelModel.meshes[i].VAO);
-            glDrawElementsInstanced(GL_TRIANGLES, morelModel.meshes[i].indices.size(), GL_UNSIGNED_INT, 0, morelNum);
-            glBindVertexArray(0);
-        }
+        draw_instanced(morelModel, morelNum);
         //russula
-        glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, russulaModel.textures_loaded[0].id);
-        glActiveTexture(GL_TEXTURE1);
-        glBindTexture(GL_TEXTURE_2D, russulaModel.textures_loaded[1].id);
-        glActiveTexture(GL_TEXTURE2);
-        glBindTexture(GL_TEXTURE_2D, russulaModel.textures_loaded[2].id);
-        for (unsigned int i = 0; i < russulaModel.meshes.size(); i++)
-        {
-            glBindVertexArray(russulaModel.meshes[i].VAO);
-            glDrawElementsInstanced(GL_TRIANGLES, russulaModel.meshes[i].indices.size(), GL_UNSIGNED_INT, 0, russulaNum);
-            glBindVertexArray(0);
-        }
+        draw_instanced(russulaModel, russulaNum);
 
-        normalShader.use();
-        normalShader.setVec3("viewPos", programState->camera.Position);
-        normalShader.setFloat("material.shininess", 32.0f);
-        normalShader.setVec3("light.direction", pointLight.position);
-        normalShader.setVec3("light.ambient", pointLight.ambient);
-        normalShader.setVec3("light.diffuse", pointLight.diffuse);
-        normalShader.setVec3("light.specular", pointLight.specular);
-        normalShader.setFloat("light.constant", pointLight.constant);
-        normalShader.setFloat("light.linear", pointLight.linear);
-        normalShader.setFloat("light.quadratic", pointLight.quadratic);
-        rock5Model.Draw(normalShader);
+
         //draw sky box
         glDepthFunc(GL_LEQUAL);
         skyBoxShader.use();
@@ -855,6 +776,32 @@ void configurate_instance_buffer(unsigned int num, Model model, glm::mat4 *model
 
         glBindVertexArray(0);
     }
+}
+
+void draw_instanced(Model model, unsigned int num){
+    //bind textures
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, model.textures_loaded[0].id);
+    glActiveTexture(GL_TEXTURE1);
+    glBindTexture(GL_TEXTURE_2D, model.textures_loaded[1].id);
+    glActiveTexture(GL_TEXTURE2);
+    glBindTexture(GL_TEXTURE_2D, model.textures_loaded[2].id);
+    for (unsigned int i = 0; i < model.meshes.size(); i++)
+    {
+        glBindVertexArray(model.meshes[i].VAO);
+        glDrawElementsInstanced(GL_TRIANGLES, model.meshes[i].indices.size(), GL_UNSIGNED_INT, 0, num);
+        glBindVertexArray(0);
+    }
+}
+
+void setup_shader_light(Shader shader, PointLight pointLight){
+    shader.setVec3("l.position", pointLight.position);
+    shader.setVec3("l.ambient", pointLight.ambient);
+    shader.setVec3("l.diffuse", pointLight.diffuse);
+    shader.setVec3("l.specular", pointLight.specular);
+    shader.setFloat("l.constant", pointLight.constant);
+    shader.setFloat("l.linear", pointLight.linear);
+    shader.setFloat("l.quadratic", pointLight.quadratic);
 }
 
 

@@ -1,0 +1,18 @@
+# 3ds Max Wavefront OBJ Exporter v0.94b - (c)2007 guruware
+# File Created: 02.08.2010 11:40:33
+
+newmtl ambrela
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 1.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.0000 0.0000 0.0000
+	Kd 0.5882 0.5882 0.5882
+	Ks 0.1350 0.1350 0.1350
+	Ke 0.0000 0.0000 0.0000
+	map_Ks ambrela_color.jpg
+	map_Kd ambrela_color.jpg
+	map_bump -bm 0.500000 ambrela_normals.jpg
+	bump ambrela_bump.jpg
